@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Workers for Your Business</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f3460 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 180, 255, 0.15), transparent 70%);
+      top: -100px;
+      right: -100px;
+      border-radius: 50%;
+    }
+
+    .badge {
+      background: rgba(0, 180, 255, 0.15);
+      border: 1px solid rgba(0, 180, 255, 0.4);
+      color: #00b4ff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, #00b4ff, #7b2ff7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #aaa;
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    /* FORM CARD */
+    .form-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .form-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .form-card p {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    .form-group input::placeholder {
+      color: #666;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: #00b4ff;
+    }
+
+    .form-group select option {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(90deg, #00b4ff, #7b2ff7);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.3s, transform 0.2s;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .privacy {
+      font-size: 0.78rem;
+      color: #555;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* FEATURES */
+    .features {
+      background: #0d0d0d;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .features h2 span {
+      background: linear-gradient(90deg, #00b4ff, #7b2ff7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .features .subtitle {
+      color: #888;
+      margin-bottom: 50px;
+      font-size: 1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 30px 24px;
+      text-align: left;
+      transition: border-color 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(0, 180, 255, 0.4);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 0.88rem;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    /* SOCIAL PROOF */
+    .proof {
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .proof h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 40px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .stat h3 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00b4ff, #7b2ff7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat p {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* CTA BOTTOM */
+    .cta-bottom {
+      background: #0a0a0a;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .cta-bottom h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-bottom p {
+      color: #888;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: linear-gradient(90deg, #00b4ff, #7b2ff7);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .cta-btn:hover { opacity: 0.88; }
+
+    /* FOOTER */
+    footer {
+      background: #050505;
+      padding: 24px 20px;
+      text-align: center;
+      color: #444;
+      font-size: 0.82rem;
+      border-top: 1px solid #111;
+    }
+
+    /* SUCCESS */
+    .success-msg {
+      display: none;
+      background: rgba(0, 200, 100, 0.1);
+      border: 1px solid rgba(0, 200, 100, 0.3);
+      border-radius: 10px;
+      padding: 16px;
+      color: #00c864;
+      font-size: 0.95rem;
+      margin-top: 16px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">🤖 AI Workers — Now Available for Any Business</div>
+    <h1>Let <span>AI Workers</span> Run Your Business 24/7</h1>
+    <p>Automate customer support, lead follow-up, appointment booking, and more — without hiring extra staff. Your AI worker never sleeps, never calls in sick, and scales with you.</p>
+
+    <div class="form-card">
+      <h2>Get Your Free AI Worker Demo</h2>
+      <p>Fill out the form and we'll show you exactly how it works for your business.</p>
+      <form id="leadForm">
+        <div class="form-group">
+          <input type="text" id="name" placeholder="Your Full Name" required />
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Your Email Address" required />
+        </div>
+        <div class="form-group">
+          <input type="tel" id="phone" placeholder="Your Phone Number" />
+        </div>
+        <div class="form-group">
+          <input type="text" id="business" placeholder="Your Business Name" />
+        </div>
+        <div class="form-group">
+          <select id="industry">
+            <option value="" disabled selected>Your Industry</option>
+            <option>Real Estate</option>
+            <option>Healthcare</option>
+            <option>E-Commerce</option>
+            <option>Restaurant / Food Service</option>
+            <option>Finance / Insurance</option>
+            <option>Marketing / Agency</option>
+            <option>Retail</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">🚀 Book My Free Demo</button>
+        <p class="privacy">🔒 No spam. Your info is 100% secure.</p>
+        <div class="success-msg" id="successMsg">✅ Thanks! We'll be in touch shortly to schedule your demo.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <h2>What Your <span>AI Worker</span> Can Do</h2>
+    <p class="subtitle">Plug in an AI worker and watch your business run on autopilot.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>24/7 Customer Support</h3>
+        <p>Answer customer questions instantly, any time of day — no wait times, no missed messages.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Appointment Booking</h3>
+        <p>Let your AI worker handle scheduling, reminders, and follow-ups automatically.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Lead Qualification</h3>
+        <p>Capture, qualify, and nurture leads from your website, social media, and ads — hands-free.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📧</div>
+        <h3>Email & Follow-Up</h3>
+        <p>Automated email sequences that keep prospects warm and convert them into paying customers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛒</div>
+        <h3>Sales Assistance</h3>
+        <p>Guide customers through your sales process and close deals even while you sleep.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Reporting & Insights</h3>
+        <p>Get clear summaries of what your AI worker is doing and the results it's generating.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="proof">
+    <h2>Businesses Are Already Winning with AI Workers</h2>
+    <div class="stats">
+      <div class="stat">
+        <h3>3x</h3>
+        <p>More leads captured</p>
+      </div>
+      <div class="stat">
+        <h3>80%</h3>
+        <p>Reduction in manual tasks</p>
+      </div>
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>Always-on availability</p>
+      </div>
+      <div class="stat">
+        <h3>10x</h3>
+        <p>Faster response times</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BOTTOM -->
+  <section class="cta-bottom">
+    <h2>Ready to Put Your Business on Autopilot?</h2>
+    <p>Book your free demo today and see your AI worker in action.</p>
+    <a href="#leadForm" class="cta-btn">🚀 Get Started — It's Free</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 AI Workers. All rights reserved. | Built for businesses ready to scale.</p>
+  </footer>
+
+  <script>
+    document.getElementById('leadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const business = document.getElementById('business').value;
+      const industry = document.getElementById('industry').value;
+
+      // Show success message
+      document.getElementById('successMsg').style.display = 'block';
+      document.querySelector('.btn').textContent = '✅ Demo Booked!';
+      document.querySelector('.btn').disabled = true;
+
+      console.log('Lead captured:', { name, email, phone, business, industry });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
